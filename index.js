@@ -10,4 +10,6 @@ app.use("/api/v1/course", courseRouter)
 
 
 app.listen(3000);
+console.log("check");
+
 
