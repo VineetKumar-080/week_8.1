@@ -16,7 +16,9 @@ const userRouter = Router();
 
     // Signin endpoint
     userRouter.post("/signin", function (req,res){
-
+        res.json({
+            message: "signup endpoint"
+        })
     })
 
     // user purchased courses endpoint
