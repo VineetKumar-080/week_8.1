@@ -10,8 +10,11 @@ app.use("/api/v1/user", userRouter)
 app.use("/api/v1/course", adminRouter)
 app.use("/api/v1/admin", courseRouter)
 
-
-app.listen(3000);
-console.log("check");
-
+async function main(){
+    await mongoose.connect("mongodb+srv://Vineet_848:vineet_8.4e8@cluster0.o8botx2.mongodb.net/coursera-app")
+    app.listen(3000);
+    console.log("listening on port 3000");
+    
+}
+main()
 
