@@ -6,6 +6,8 @@ const jwt = require("jsonwebtoken")
 const mongoose = require("mongoose")
 const app = express()
 
+app.use(express.json())
+
 app.use("/api/v1/user", userRouter)
 app.use("/api/v1/course", adminRouter)
 app.use("/api/v1/admin", courseRouter)
