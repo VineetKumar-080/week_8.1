@@ -4,7 +4,7 @@
 
 // better approach is this one.
 const { Router } = require("express")
-const { userModel } = require("../db")
+const { userModel, purchaseModel, courseModel } = require("../db")
 const jwt = require("jsonwebtoken")
 const {JWT_USER_PASSWORD} = require("../config");
 const { userMiddleware } = require("../middleware/user");
@@ -57,18 +57,22 @@ const userRouter = Router();
 
     // user purchased courses endpoint
     userRouter.get("/purchases", userMiddleware, async function (req,res){
-        const userID = req.userID;
+        const userId = req.userId;
         const purchases = await purchaseModel.find({
-            userID,
+            userId,
+        })
+
+        const courseData = await courseModel.find({
+            _id: { $in: purchases.map(x => x.courseId)}
         })
 
         res.json({
-            purchases
+            purchases,
+            courseData
         })
     
 
 })
-
 
 module.exports = {
     userRouter: userRouter

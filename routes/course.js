@@ -9,7 +9,7 @@ courseRouter.post("/purchase", userMiddleware, async function (req,res){
     const courseId = req.body.courseId
 
     await purchaseModel.create({
-        userId,
+        userID,
         courseId
     })
 
