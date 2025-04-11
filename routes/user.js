@@ -6,7 +6,8 @@
 const { Router } = require("express")
 const { userModel } = require("../db")
 const jwt = require("jsonwebtoken")
-const {JWT_USER_PASSWORD} = require("../config")
+const {JWT_USER_PASSWORD} = require("../config");
+const { userMiddleware } = require("../middleware/user");
 
 const userRouter = Router();
 // Router is a function, whereas it is a function  
@@ -55,7 +56,16 @@ const userRouter = Router();
     })
 
     // user purchased courses endpoint
-    userRouter.get("/purchases", function (req,res){
+    userRouter.get("/purchases", userMiddleware, async function (req,res){
+        const userID = req.userID;
+        const purchases = await purchaseModel.find({
+            userID,
+        })
+
+        res.json({
+            purchases
+        })
+    
 
 })
 
